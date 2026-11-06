@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>흑백 증후군 | Monochrome Syndrome</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        :root {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --accent-green: #4CAF50;
+            --accent-blue: #2196F3;
+            --border-color: #333333;
+            --card-bg: #1e1e1e;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border-bottom: none;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+        }
+
+        .hero p.logline {
+            font-size: 1.2rem;
+            color: #aaaaaa;
+            max-width: 600px;
+            margin-bottom: 40px;
+            word-break: keep-all;
+            transition: all 0.5s ease;
+        }
+
+        /* 스토리 그리드 */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .story-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .dot-green { background-color: var(--accent-green); }
+        .dot-blue { background-color: var(--accent-blue); }
+        .dot-gray { background-color: #666; }
+
+        .next-story {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.2rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        /* 캐릭터 섹션 */
+        .character-wrap {
+            display: flex;
+            gap: 50px;
+            margin-top: 50px;
+            justify-content: center;
+        }
+
+        .character {
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .character-img {
+            width: 200px;
+            height: 250px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+        }
+
+        /* 시스템 섹션 */
+        .system-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tag {
+            padding: 8px 20px;
+            background: #333;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero container">
+        <h1>흑백 증후군</h1>
+        <p class="logline">감정과 기억을 잃고 흑백의 세계를 홀로 살아가는 소녀가,<br>정체불명의 생물 '모노'와 함께 잃어버린 '색'과 '자신'을 되찾는 여정</p>
+    </header>
+   
+    <!-- Illustration Section -->
+    <div class="illustration-section container">
+        <div class="illustration-container">
+            <img src="https://i.imgur.com/N0H1tYS.png" alt="흑백 증후군 게임 일러스트">
+        </div>
+    </div>
+    
+    <!-- Scenario Section -->
+    <section class="container" id="story">
+        <h2>시나리오</h2>
+        <p style="text-align: center; color: #aaa; max-width: 700px; margin: 0 auto;">
+            색채도, 재앙도, 사건도 없는 평화롭지만 기형적인 흑백의 세계.<br>
+            그곳에 나타난 이질적인 현상 '노이즈'를 해결하며 감정을 깨달아갑니다.
+        </p>
+        
+        <div class="story-grid">
+            <div class="story-card">
+                <div class="color-dot dot-gray"></div>
+                <h3>Prologue</h3>
+                <p>감정과 기억이 없는 유일한 주민 '소녀'가 평소와 다르게 발생한 노이즈에서 '모노'를 구조하며 동행을 시작합니다.</p>
+            </div>
+            <div class="story-card">
+                <div class="color-dot dot-green"></div>
+                <h3>Chapter 1</h3>
+                <p>두 번째 노이즈를 제거하여 '초록색'과 행복했던 기억, 그리고 '기쁨'의 감정을 회복합니다.</p>
+            </div>
+            <div class="story-card">
+                <div class="color-dot dot-blue"></div>
+                <h3>Chapter 2</h3>
+                <p>새로운 마을에서 세 번째 노이즈를 제거하여 '파란색'과 슬픈 기억, '슬픔'의 감정을 마주하게 됩니다.</p>
+            </div>
+        </div>
+        
+        <p class="next-story">그리고 펼쳐질 다음 이야기는...</p>
+    </section>
+
+    <!-- Characters Section -->
+    <section class="container" id="characters">
+        <h2>등장인물</h2>
+        <div class="character-wrap">
+            <div class="character">
+                <div class="character-img">소녀 스탠딩 일러스트</div>
+                <h3>소녀</h3>
+                <p>흑백 세계의 유일한 주민. 감정, 기억, 의무, 욕망이 거세된 공허한 상태에서 서서히 자아를 형성해 나갑니다.</p>
+            </div>
+            <div class="character">
+                <div class="character-img">모노 일러스트</div>
+                <h3>모노</h3>
+                <p>외부에서 온 것으로 추정되는 출신 불명의 생물체. 활발한 성격으로 스토리의 텐션을 이끌어가는 조력자입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Section -->
+    <section class="container" id="system">
+        <h2>핵심 시스템</h2>
+        <div class="system-tags">
+            <span class="tag">비주얼 노벨</span>
+            <span class="tag">포인트 앤 클릭 어드벤처</span>
+            <span class="tag">비폭력 퍼즐</span>
+        </div>
+        <div class="story-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="story-card">
+                <h3>스토리텔링 파트</h3>
+                <ul style="padding-left: 20px; color: #ccc;">
+                    <li>텍스트 및 스탠딩 일러스트 기반 대화</li>
+                    <li>선택지에 따른 스크립트 분기 변화</li>
+                    <li>편의성을 위한 백로그 및 수집 요소 열람 지원</li>
+                </ul>
+            </div>
+            <div class="story-card">
+                <h3>어드벤처 파트</h3>
+                <ul style="padding-left: 20px; color: #ccc;">
+                    <li>조사 포인트(돋보기 아이콘) 클릭을 통한 단서 수집</li>
+                    <li>단어 조합, 그림 맞추기 등 복합적인 수수께끼</li>
+                    <li>오답 페널티 배제, 언제든 단서 팝업 회귀 가능</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Monochrome Syndrome. All rights reserved.</p>
+    </footer>
+</body>
+</html>
