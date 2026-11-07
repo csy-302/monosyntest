@@ -45,6 +45,12 @@
             font-size: 2.5rem;
             text-align: center;
         }
+        
+        /* 일러스트 섹션 아래 간격 50px 추가 */
+        .illustration-section {
+            margin-bottom: 50px;
+        }
+
         .illustration-container img {
             width: 100%;       /* 가로 폭에 딱 맞게 조절 */
             height: auto;      /* 비율 유지 */
@@ -101,16 +107,17 @@
             transform: translateY(-5px);
         }
 
-        .color-dot {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            margin-bottom: 15px;
+        /* 시나리오 카드 배경색 지정 */
+        .card-prologue { background-color: #666666; }
+        .card-chapter1 { background-color: var(--accent-green); }
+        .card-chapter2 { background-color: var(--accent-blue); }
+        
+        /* 시나리오 카드 글자색 흰색으로 고정 */
+        .card-prologue h3, .card-prologue p,
+        .card-chapter1 h3, .card-chapter1 p,
+        .card-chapter2 h3, .card-chapter2 p {
+            color: #ffffff !important;
         }
-
-        .dot-green { background-color: var(--accent-green); }
-        .dot-blue { background-color: var(--accent-blue); }
-        .dot-gray { background-color: #666; }
 
         .next-story {
             text-align: center;
@@ -150,15 +157,40 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .tag {
-            padding: 8px 20px;
+            padding: 10px 25px;
             background: #333;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* 활성화되거나 마우스가 올라간 탭의 색상 반전 */
+        .tag:hover, .tag.active {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* 시스템 설명 박스 */
+        .system-desc-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cccccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            word-break: keep-all;
         }
 
         footer {
@@ -176,7 +208,7 @@
         <h1>흑백 증후군</h1>
         <p class="logline">감정과 기억을 잃고 흑백의 세계를 홀로 살아가는 소녀가,<br>정체불명의 생물 '모노'와 함께 잃어버린 '색'과 '자신'을 되찾는 여정</p>
     </header>
-   
+    
     <!-- Illustration Section -->
     <div class="illustration-section container">
         <div class="illustration-container">
@@ -193,18 +225,15 @@
         </p>
         
         <div class="story-grid">
-            <div class="story-card">
-                <div class="color-dot dot-gray"></div>
+            <div class="story-card card-prologue">
                 <h3>Prologue</h3>
                 <p>감정과 기억이 없는 유일한 주민 '소녀'가 평소와 다르게 발생한 노이즈에서 '모노'를 구조하며 동행을 시작합니다.</p>
             </div>
-            <div class="story-card">
-                <div class="color-dot dot-green"></div>
+            <div class="story-card card-chapter1">
                 <h3>Chapter 1</h3>
                 <p>두 번째 노이즈를 제거하여 '초록색'과 행복했던 기억, 그리고 '기쁨'의 감정을 회복합니다.</p>
             </div>
-            <div class="story-card">
-                <div class="color-dot dot-blue"></div>
+            <div class="story-card card-chapter2">
                 <h3>Chapter 2</h3>
                 <p>새로운 마을에서 세 번째 노이즈를 제거하여 '파란색'과 슬픈 기억, '슬픔'의 감정을 마주하게 됩니다.</p>
             </div>
@@ -220,12 +249,12 @@
             <div class="character">
                 <div class="character-img">소녀 스탠딩 일러스트</div>
                 <h3>소녀</h3>
-                <p>흑백 세계의 유일한 주민. 감정, 기억, 의무, 욕망이 거세된 공허한 상태에서 서서히 자아를 형성해 나갑니다.</p>
+                <p>흑백 세계의 유일한 주민. 감정과 기억을 모두 잃은 채 홀로 살아가고 있습니다.</p>
             </div>
             <div class="character">
                 <div class="character-img">모노 일러스트</div>
                 <h3>모노</h3>
-                <p>외부에서 온 것으로 추정되는 출신 불명의 생물체. 활발한 성격으로 스토리의 텐션을 이끌어가는 조력자입니다.</p>
+                <p>흑백 세계의 방문자. 세계가 잃어버린 색을 되찾기 위해 방문했습니다.</p>
             </div>
         </div>
     </section>
@@ -234,32 +263,35 @@
     <section class="container" id="system">
         <h2>핵심 시스템</h2>
         <div class="system-tags">
-            <span class="tag">비주얼 노벨</span>
-            <span class="tag">포인트 앤 클릭 어드벤처</span>
-            <span class="tag">비폭력 퍼즐</span>
+            <span class="tag" id="tag-vn" onclick="showSystemDesc('vn')" onmouseover="showSystemDesc('vn')">비주얼 노벨</span>
+            <span class="tag" id="tag-noise" onclick="showSystemDesc('noise')" onmouseover="showSystemDesc('noise')">노이즈</span>
+            <span class="tag" id="tag-iro" onclick="showSystemDesc('iro')" onmouseover="showSystemDesc('iro')">이로</span>
         </div>
-        <div class="story-grid" style="grid-template-columns: 1fr 1fr;">
-            <div class="story-card">
-                <h3>스토리텔링 파트</h3>
-                <ul style="padding-left: 20px; color: #ccc;">
-                    <li>텍스트 및 스탠딩 일러스트 기반 대화</li>
-                    <li>선택지에 따른 스크립트 분기 변화</li>
-                    <li>편의성을 위한 백로그 및 수집 요소 열람 지원</li>
-                </ul>
-            </div>
-            <div class="story-card">
-                <h3>어드벤처 파트</h3>
-                <ul style="padding-left: 20px; color: #ccc;">
-                    <li>조사 포인트(돋보기 아이콘) 클릭을 통한 단서 수집</li>
-                    <li>단어 조합, 그림 맞추기 등 복합적인 수수께끼</li>
-                    <li>오답 페널티 배제, 언제든 단서 팝업 회귀 가능</li>
-                </ul>
-            </div>
+        
+        <div class="system-desc-box" id="systemDescBox">
+            <p style="margin:0;">위 키워드에 마우스를 올리거나 클릭하여 상세 설명을 확인하세요.</p>
         </div>
     </section>
 
     <footer>
         <p>© 2026 Monochrome Syndrome. All rights reserved.</p>
     </footer>
+
+    <script>
+        const descriptions = {
+            vn: "소녀와 모노의 여행을 감상하며 두 존재의 이야기를 따라 '흑백 증후군'의 시나리오가 전개됩니다. 정해진 이야기 속에서, 약간의 선택을 통해 다른 결말로 이어집니다.",
+            noise: "흑백의 세계를 안전하게 여행하려면, 세계에 발생한 균열 '노이즈'를 제거해야 합니다. 노이즈는 포인트 앤 클릭 탐사, 수수께끼 퍼즐, 다양한 기믹이 담긴 미니게임을 클리어하는 것으로 없앨 수 있습니다. 노이즈가 사라지지 않는 한, 세계의 이야기는 진행되지 않습니다.",
+            iro: "여행을 하다 보면 소녀와 모노는 세계의 색을 되찾게 됩니다. 이것은 '이로' 라고 불리며, 시나리오 진행을 통해 이로를 수집할수록 세계의 색이 더해져 보다 다채로운 색채가 펼쳐지게 됩니다."
+        };
+
+        function showSystemDesc(type) {
+            const descBox = document.getElementById('systemDescBox');
+            descBox.innerHTML = '<p style="margin:0;">' + descriptions[type] + '</p>';
+            
+            // 모든 탭의 active 클래스 제거 후, 선택된 탭에만 active 추가
+            document.querySelectorAll('.system-tags .tag').forEach(el => el.classList.remove('active'));
+            document.getElementById('tag-' + type).classList.add('active');
+        }
+    </script>
 </body>
 </html>
