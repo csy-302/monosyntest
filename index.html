@@ -59,6 +59,7 @@
             display: block;
             margin: 0 auto;
         }
+        
         /* 히어로 섹션 */
         .hero {
             height: 100vh;
@@ -176,21 +177,68 @@
             color: #000000;
         }
 
-        /* 시스템 설명 박스 */
+        /* 시스템 설명 박스 및 이미지 레이아웃 */
         .system-desc-box {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             padding: 40px 30px;
             border-radius: 12px;
-            text-align: center;
-            min-height: 80px;
+            min-height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 40px;
             color: #cccccc;
             font-size: 1.1rem;
             line-height: 1.6;
             word-break: keep-all;
+        }
+
+        /* 초기 상태 안내 문구 정렬용 클래스 */
+        .system-desc-box.initial {
+            text-align: center;
+        }
+
+        /* 왼쪽 이미지 컨테이너 */
+        .system-image-container {
+            flex: 1;
+            max-width: 50%;
+            display: none; /* 초기에는 숨김 */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .system-image-container img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain; /* 박스 안에서 비율이 깨지지 않고 깔끔하게 들어가도록 설정 */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* 오른쪽 텍스트 컨테이너 */
+        .system-text-container {
+            flex: 1;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* 모바일 등 작은 화면일 때 세로 배치로 변경 */
+        @media (max-width: 768px) {
+            .system-desc-box {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            .system-image-container {
+                max-width: 100%;
+            }
+            .system-text-container {
+                text-align: center;
+            }
         }
 
         footer {
@@ -268,8 +316,13 @@
             <span class="tag" id="tag-iro" onclick="showSystemDesc('iro')" onmouseover="showSystemDesc('iro')">이로</span>
         </div>
         
-        <div class="system-desc-box" id="systemDescBox">
-            <p style="margin:0;">위 키워드에 마우스를 올리거나 클릭하여 상세 설명을 확인하세요.</p>
+        <div class="system-desc-box initial" id="systemDescBox">
+            <div class="system-image-container" id="systemImgWrapper">
+                <img id="systemImg" src="" alt="시스템 화면">
+            </div>
+            <div class="system-text-container" id="systemTextWrapper">
+                <p style="margin:0;">위 키워드에 마우스를 올리거나 클릭하여 상세 설명을 확인하세요.</p>
+            </div>
         </div>
     </section>
 
@@ -278,17 +331,39 @@
     </footer>
 
     <script>
-        const descriptions = {
-            vn: "소녀와 모노의 여행을 감상하며 두 존재의 이야기를 따라 '흑백 증후군'의 시나리오가 전개됩니다. 정해진 이야기 속에서, 약간의 선택을 통해 다른 결말로 이어집니다.",
-            noise: "흑백의 세계를 안전하게 여행하려면, 세계에 발생한 균열 '노이즈'를 제거해야 합니다. 노이즈는 포인트 앤 클릭 탐사, 수수께끼 퍼즐, 다양한 기믹이 담긴 미니게임을 클리어하는 것으로 없앨 수 있습니다. 노이즈가 사라지지 않는 한, 세계의 이야기는 진행되지 않습니다.",
-            iro: "여행을 하다 보면 소녀와 모노는 세계의 색을 되찾게 됩니다. 이것은 '이로' 라고 불리며, 시나리오 진행을 통해 이로를 수집할수록 세계의 색이 더해져 보다 다채로운 색채가 펼쳐지게 됩니다."
+        // 이미지와 텍스트 데이터를 함께 관리하도록 오브젝트 수정
+        const systemData = {
+            vn: {
+                text: "소녀와 모노의 여행을 감상하며 두 존재의 이야기를 따라 '흑백 증후군'의 시나리오가 전개됩니다. 정해진 이야기 속에서, 약간의 선택을 통해 다른 결말로 이어집니다.",
+                img: "https://i.imgur.com/GFARf6p.png"
+            },
+            noise: {
+                text: "흑백의 세계를 안전하게 여행하려면, 세계에 발생한 균열 '노이즈'를 제거해야 합니다. 노이즈는 포인트 앤 클릭 탐사, 수수께끼 퍼즐, 다양한 기믹이 담긴 미니게임을 클리어하는 것으로 없앨 수 있습니다. 노이즈가 사라지지 않는 한, 세계의 이야기는 진행되지 않습니다.",
+                img: "https://i.imgur.com/Vgb1Rza.jpeg"
+            },
+            iro: {
+                text: "여행을 하다 보면 소녀와 모노는 세계의 색을 되찾게 됩니다. 이것은 '이로' 라고 불리며, 시나리오 진행을 통해 이로를 수집할수록 세계의 색이 더해져 보다 다채로운 색채가 펼쳐지게 됩니다.",
+                img: "https://i.imgur.com/v8mF6UX.jpeg"
+            }
         };
 
         function showSystemDesc(type) {
             const descBox = document.getElementById('systemDescBox');
-            descBox.innerHTML = '<p style="margin:0;">' + descriptions[type] + '</p>';
+            const imgWrapper = document.getElementById('systemImgWrapper');
+            const imgElement = document.getElementById('systemImg');
+            const textWrapper = document.getElementById('systemTextWrapper');
             
-            // 모든 탭의 active 클래스 제거 후, 선택된 탭에만 active 추가
+            // 초기 클래스 제거 (가운데 정렬 해제)
+            descBox.classList.remove('initial');
+            
+            // 이미지 업데이트 및 표시
+            imgElement.src = systemData[type].img;
+            imgWrapper.style.display = 'flex';
+            
+            // 텍스트 업데이트
+            textWrapper.innerHTML = '<p style="margin:0;">' + systemData[type].text + '</p>';
+            
+            // 탭 활성화 디자인 변경
             document.querySelectorAll('.system-tags .tag').forEach(el => el.classList.remove('active'));
             document.getElementById('tag-' + type).classList.add('active');
         }
