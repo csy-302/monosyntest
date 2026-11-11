@@ -36,7 +36,7 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        h1, h2, h3 {
+        h2, h3 {
             font-weight: 700;
             margin-bottom: 20px;
         }
@@ -52,9 +52,9 @@
         }
 
         .illustration-container img {
-            width: 100%;       /* 가로 폭에 딱 맞게 조절 */
-            height: auto;      /* 비율 유지 */
-            max-height: 500px; /* 너무 길어지지 않도록 최대 높이 제한 */
+            width: 100%;
+            height: auto;
+            max-height: 500px;
             object-fit: contain; 
             display: block;
             margin: 0 auto;
@@ -73,10 +73,13 @@
             position: relative;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
+        /* 새로 추가된 로고 이미지 스타일 */
+        .hero-logo {
+            width: 100%;
+            max-width: 500px; /* 로고의 최대 크기 제한 */
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)); /* 로고를 배경과 돋보이게 하는 그림자 */
         }
 
         .hero p.logline {
@@ -171,7 +174,6 @@
             transition: all 0.3s ease;
         }
 
-        /* 활성화되거나 마우스가 올라간 탭의 색상 반전 */
         .tag:hover, .tag.active {
             background: #ffffff;
             color: #000000;
@@ -194,16 +196,14 @@
             word-break: keep-all;
         }
 
-        /* 초기 상태 안내 문구 정렬용 클래스 */
         .system-desc-box.initial {
             text-align: center;
         }
 
-        /* 왼쪽 이미지 컨테이너 */
         .system-image-container {
             flex: 1;
             max-width: 50%;
-            display: none; /* 초기에는 숨김 */
+            display: none;
             justify-content: center;
             align-items: center;
         }
@@ -212,12 +212,11 @@
             width: 100%;
             height: auto;
             max-height: 300px;
-            object-fit: contain; /* 박스 안에서 비율이 깨지지 않고 깔끔하게 들어가도록 설정 */
+            object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        /* 오른쪽 텍스트 컨테이너 */
         .system-text-container {
             flex: 1;
             text-align: left;
@@ -226,7 +225,6 @@
             justify-content: center;
         }
 
-        /* 모바일 등 작은 화면일 때 세로 배치로 변경 */
         @media (max-width: 768px) {
             .system-desc-box {
                 flex-direction: column;
@@ -253,7 +251,8 @@
 
     <!-- Hero Section -->
     <header class="hero container">
-        <h1>흑백 증후군</h1>
+        <!-- 텍스트 <h1> 태그를 제거하고 타이포그래피 이미지 태그로 대체했습니다 -->
+        <img src="https://i.imgur.com/fS7QAkX.png" alt="흑백 증후군 로고" class="hero-logo">
         <p class="logline">감정과 기억을 잃고 흑백의 세계를 홀로 살아가는 소녀가,<br>정체불명의 생물 '모노'와 함께 잃어버린 '색'과 '자신'을 되찾는 여정</p>
     </header>
     
@@ -331,7 +330,6 @@
     </footer>
 
     <script>
-        // 이미지와 텍스트 데이터를 함께 관리하도록 오브젝트 수정
         const systemData = {
             vn: {
                 text: "소녀와 모노의 여행을 감상하며 두 존재의 이야기를 따라 '흑백 증후군'의 시나리오가 전개됩니다. 정해진 이야기 속에서, 약간의 선택을 통해 다른 결말로 이어집니다.",
@@ -353,17 +351,13 @@
             const imgElement = document.getElementById('systemImg');
             const textWrapper = document.getElementById('systemTextWrapper');
             
-            // 초기 클래스 제거 (가운데 정렬 해제)
             descBox.classList.remove('initial');
             
-            // 이미지 업데이트 및 표시
             imgElement.src = systemData[type].img;
             imgWrapper.style.display = 'flex';
             
-            // 텍스트 업데이트
             textWrapper.innerHTML = '<p style="margin:0;">' + systemData[type].text + '</p>';
             
-            // 탭 활성화 디자인 변경
             document.querySelectorAll('.system-tags .tag').forEach(el => el.classList.remove('active'));
             document.getElementById('tag-' + type).classList.add('active');
         }
