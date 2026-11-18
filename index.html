@@ -76,10 +76,10 @@
         /* 새로 추가된 로고 이미지 스타일 */
         .hero-logo {
             width: 100%;
-            max-width: 500px; /* 로고의 최대 크기 제한 */
+            max-width: 500px;
             height: auto;
             margin-bottom: 20px;
-            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)); /* 로고를 배경과 돋보이게 하는 그림자 */
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
         }
 
         .hero p.logline {
@@ -154,14 +154,13 @@
             align-items: center;
             justify-content: center;
             color: #777;
-            overflow: hidden; /* 이미지가 박스를 벗어나지 않도록 설정 */
+            overflow: hidden;
         }
         
-        /* 캐릭터 이미지 핏 설정 */
         .character-img img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* 비율을 유지하면서 박스 안에 맞춤 */
+            object-fit: contain;
         }
 
         /* 시스템 섹션 */
@@ -187,7 +186,6 @@
             color: #000000;
         }
 
-        /* 시스템 설명 박스 및 이미지 레이아웃 */
         .system-desc-box {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -231,6 +229,121 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        /* =========================================
+           [추가] 게임 플레이 섹션 & 모달 스타일
+           ========================================= */
+        .play-section {
+            text-align: center;
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .play-section p {
+            color: #aaaaaa;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            word-break: keep-all;
+        }
+
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px 48px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: #121212;
+            background-color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            background-color: transparent;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 24px rgba(255, 255, 255, 0.3);
+        }
+
+        .play-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* 게임 실행 모달 오버레이 */
+        .game-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-modal.active {
+            display: flex;
+        }
+
+        .game-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            background-color: #000000;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+            overflow: visible;
+        }
+
+        .game-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .modal-controls {
+            position: absolute;
+            top: -44px;
+            right: 0;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .modal-action-btn {
+            background: rgba(30, 30, 30, 0.9);
+            border: 1px solid #444;
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .modal-action-btn:hover {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
         }
 
         @media (max-width: 768px) {
@@ -302,7 +415,6 @@
         <div class="character-wrap">
             <div class="character">
                 <div class="character-img">
-                    <!-- 소녀 이미지 적용 -->
                     <img src="https://i.imgur.com/WoFrnJC.png" alt="소녀 일러스트">
                 </div>
                 <h3>소녀</h3>
@@ -310,7 +422,6 @@
             </div>
             <div class="character">
                 <div class="character-img">
-                    <!-- 모노 이미지 적용 -->
                     <img src="https://i.imgur.com/JMa3Qb1.png" alt="모노 일러스트">
                 </div>
                 <h3>모노</h3>
@@ -337,6 +448,27 @@
             </div>
         </div>
     </section>
+
+    <!-- [추가] Game Play Section -->
+    <section class="container play-section" id="play">
+        <h2>지금 플레이하기</h2>
+        <p>소녀와 모노의 여정에 함께하여 흑백의 세계에 색을 되찾아 주세요.</p>
+        <button type="button" class="play-btn" id="openGameBtn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            게임 플레이하기
+        </button>
+    </section>
+
+    <!-- [추가] Game Modal -->
+    <div class="game-modal" id="gameModal" aria-hidden="true">
+        <div class="game-modal-content">
+            <div class="modal-controls">
+                <a href="./Play/index.html" target="_blank" rel="noopener noreferrer" class="modal-action-btn">전체 화면(새 탭)으로 열기 ↗</a>
+                <button type="button" class="modal-action-btn" id="closeGameBtn">✕ 닫기</button>
+            </div>
+            <iframe id="gameFrame" src="" title="흑백 증후군 웹 게임" allowfullscreen></iframe>
+        </div>
+    </div>
 
     <footer>
         <p>© 2026 Monochrome Syndrome. All rights reserved.</p>
@@ -374,6 +506,37 @@
             document.querySelectorAll('.system-tags .tag').forEach(el => el.classList.remove('active'));
             document.getElementById('tag-' + type).classList.add('active');
         }
+
+        // [추가] 게임 플레이 모달 동작 제어
+        const GAME_PATH = './Play/index.html'; // Play 폴더 내 실행 파일 경로
+        const openGameBtn = document.getElementById('openGameBtn');
+        const closeGameBtn = document.getElementById('closeGameBtn');
+        const gameModal = document.getElementById('gameModal');
+        const gameFrame = document.getElementById('gameFrame');
+
+        function openGame() {
+            gameFrame.src = GAME_PATH;
+            gameModal.classList.add('active');
+            gameModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGame() {
+            gameModal.classList.remove('active');
+            gameModal.setAttribute('aria-hidden', 'true');
+            gameFrame.src = ''; // BGM 및 게임 실행 즉시 종료
+            document.body.style.overflow = '';
+        }
+
+        openGameBtn.addEventListener('click', openGame);
+        closeGameBtn.addEventListener('click', closeGame);
+
+        // ESC 키를 눌러 게임 창 닫기
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && gameModal.classList.contains('active')) {
+                closeGame();
+            }
+        });
     </script>
 </body>
 </html>
